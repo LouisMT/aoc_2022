@@ -4,17 +4,15 @@ use itertools::Itertools;
 
 use std::collections::HashSet;
 use std::error::Error;
-use std::fs::File;
-use std::io::{BufReader, Lines};
 
 pub struct Day3Part1();
 
 impl Puzzle for Day3Part1 {
-  fn solve(lines: Lines<BufReader<File>>) -> Result<i32, Box<dyn Error>> {
+  fn solve(lines: Vec<String>) -> Result<i32, Box<dyn Error>> {
     let mut total_priority = 0;
 
     for line in lines {
-      let items = line?.chars().collect_vec();
+      let items = line.chars().collect_vec();
       let (left, right) = items.split_at(items.len() / 2);
       let left_set = HashSet::<&char>::from_iter(left);
       let right_set = HashSet::<&char>::from_iter(right);

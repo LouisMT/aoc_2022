@@ -4,13 +4,11 @@ use crate::utils::puzzle::Puzzle;
 
 use std::collections::HashMap;
 use std::error::Error;
-use std::fs::File;
-use std::io::{BufReader, Lines};
 
 pub struct Day2Part1();
 
 impl Puzzle for Day2Part1 {
-  fn solve(lines: Lines<BufReader<File>>) -> Result<i32, Box<dyn Error>> {
+  fn solve(lines: Vec<String>) -> Result<i32, Box<dyn Error>> {
     let combinations = HashMap::from([
       (('X', 'C'), 6),
       (('Z', 'B'), 6),
@@ -28,7 +26,7 @@ impl Puzzle for Day2Part1 {
     let mut score = 0;
 
     for line in lines {
-      match line?.chars().collect_tuple() {
+      match line.chars().collect_tuple() {
         Some((theirs, _, mine)) => {
           score += combinations.get(&(mine, theirs)).unwrap_or(&0);
           score += scores.get(&mine).expect("turn should exist");

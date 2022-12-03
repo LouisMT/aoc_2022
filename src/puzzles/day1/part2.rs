@@ -3,24 +3,20 @@ use itertools::Itertools;
 use crate::utils::puzzle::Puzzle;
 
 use std::error::Error;
-use std::fs::File;
-use std::io::{BufReader, Lines};
 
 pub struct Day1Part2();
 
 impl Puzzle for Day1Part2 {
-  fn solve(lines: Lines<BufReader<File>>) -> Result<i32, Box<dyn Error>> {
+  fn solve(lines: Vec<String>) -> Result<i32, Box<dyn Error>> {
     let mut current_calories = 0;
     let mut max_calories = Vec::<i32>::new();
 
     for line in lines {
-      match line? {
-        line if line.is_empty() => {
-          max_calories.push(current_calories);
-          current_calories = 0;
-        }
-
-        line => current_calories += line.parse::<i32>()?,
+      if line.is_empty() {
+        max_calories.push(current_calories);
+        current_calories = 0;
+      } else {
+        current_calories += line.parse::<i32>()?;
       }
     }
 

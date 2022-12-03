@@ -4,18 +4,14 @@ use itertools::Itertools;
 
 use std::collections::HashSet;
 use std::error::Error;
-use std::fs::File;
-use std::io::{BufReader, Lines};
 
 pub struct Day3Part2();
 
 impl Puzzle for Day3Part2 {
-  fn solve(lines: Lines<BufReader<File>>) -> Result<i32, Box<dyn Error>> {
+  fn solve(lines: Vec<String>) -> Result<i32, Box<dyn Error>> {
     let mut total_priority = 0;
 
-    for lines in &lines.chunks(3) {
-      let lines: Vec<_> = lines.try_collect()?;
-
+    for lines in &lines.into_iter().chunks(3) {
       total_priority += match lines
         .into_iter()
         .map(|l| HashSet::<char>::from_iter(l.chars()))

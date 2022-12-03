@@ -1,16 +1,14 @@
-use itertools::Itertools;
-
 use crate::utils::puzzle::Puzzle;
+
+use itertools::Itertools;
 
 use std::collections::HashMap;
 use std::error::Error;
-use std::fs::File;
-use std::io::{BufReader, Lines};
 
 pub struct Day2Part2();
 
 impl Puzzle for Day2Part2 {
-  fn solve(lines: Lines<BufReader<File>>) -> Result<i32, Box<dyn Error>> {
+  fn solve(lines: Vec<String>) -> Result<i32, Box<dyn Error>> {
     let win_combinations = HashMap::from([('A', 'B'), ('B', 'C'), ('C', 'A')]);
     let lose_combinations = HashMap::from([('A', 'C'), ('B', 'A'), ('C', 'B')]);
     let scores = HashMap::from([('A', 1), ('B', 2), ('C', 3)]);
@@ -18,7 +16,7 @@ impl Puzzle for Day2Part2 {
     let mut score = 0;
 
     for line in lines {
-      score += match line?.chars().collect_tuple() {
+      score += match line.chars().collect_tuple() {
         Some((theirs, _, 'X')) => {
           let mine = lose_combinations.get(&theirs).expect("turn should exist");
           *scores.get(mine).expect("turn should exist")
