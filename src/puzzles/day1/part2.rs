@@ -1,21 +1,22 @@
+use itertools::Itertools;
+
 use crate::utils::puzzle::Puzzle;
 
-use std::cmp::max;
 use std::error::Error;
 use std::fs::File;
 use std::io::{BufReader, Lines};
 
-pub struct Day1Part1();
+pub struct Day1Part2();
 
-impl Puzzle for Day1Part1 {
+impl Puzzle for Day1Part2 {
   fn solve(lines: Lines<BufReader<File>>) -> Result<i32, Box<dyn Error>> {
     let mut current_calories = 0;
-    let mut max_calories = 0;
+    let mut max_calories = Vec::<i32>::new();
 
     for line in lines {
       match line? {
         line if line.is_empty() => {
-          max_calories = max(current_calories, max_calories);
+          max_calories.push(current_calories);
           current_calories = 0;
         }
 
@@ -23,9 +24,14 @@ impl Puzzle for Day1Part1 {
       }
     }
 
-    max_calories = max(current_calories, max_calories);
+    max_calories.push(current_calories);
+    let top_3_sum = max_calories
+      .into_iter()
+      .sorted_by(|a, b| b.cmp(a))
+      .take(3)
+      .sum();
 
-    Ok(max_calories)
+    Ok(top_3_sum)
   }
 }
 
@@ -38,9 +44,9 @@ mod tests {
   #[test]
   fn solve_example() -> Result<(), Box<dyn Error>> {
     let lines = input_reader::example_for_day(1)?;
-    let result = super::Day1Part1::solve(lines)?;
+    let result = super::Day1Part2::solve(lines)?;
 
-    assert_eq!(result, 24000);
+    assert_eq!(result, 45000);
 
     Ok(())
   }
@@ -48,9 +54,9 @@ mod tests {
   #[test]
   fn solve() -> Result<(), Box<dyn Error>> {
     let lines = input_reader::for_day(1)?;
-    let result = super::Day1Part1::solve(lines)?;
+    let result = super::Day1Part2::solve(lines)?;
 
-    assert_eq!(result, 74711);
+    assert_eq!(result, 209481);
 
     Ok(())
   }

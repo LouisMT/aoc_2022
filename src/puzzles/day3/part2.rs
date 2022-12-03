@@ -33,3 +33,30 @@ fn compute_priority(item: char) -> i32 {
     item => item - 38,
   }
 }
+
+#[cfg(test)]
+mod tests {
+  use crate::utils::{input_reader, puzzle::Puzzle};
+
+  use std::error::Error;
+
+  #[test]
+  fn solve_example() -> Result<(), Box<dyn Error>> {
+    let lines = input_reader::example_for_day(3)?;
+    let result = super::Day3Part2::solve(lines)?;
+
+    assert_eq!(result, 70);
+
+    Ok(())
+  }
+
+  #[test]
+  fn solve() -> Result<(), Box<dyn Error>> {
+    let lines = input_reader::for_day(3)?;
+    let result = super::Day3Part2::solve(lines)?;
+
+    assert_eq!(result, 2510);
+
+    Ok(())
+  }
+}
