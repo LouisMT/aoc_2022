@@ -28,8 +28,8 @@ impl Puzzle for Day3Part1 {
 }
 
 fn compute_priority(item: char) -> i32 {
-  match item as u32 {
+  match item as i32 {
     item if item >= 97 => item - 96,
     item => item - 38,
-  }.try_into().unwrap()
+  }
 }

@@ -14,14 +14,13 @@ impl Puzzle for Day3Part2 {
     let mut total_priority = 0;
 
     for lines_chunk in &lines.chunks(3) {
-      match lines_chunk
+      total_priority += match lines_chunk
         .map(|l| HashSet::<char>::from_iter(l.unwrap().chars()))
-        .reduce(|acc, items| {
-          HashSet::<char>::from_iter(acc.intersection(&items).copied())
-        }) {
-          Some(items) => total_priority += items.into_iter().map(|i| compute_priority(i)).sum::<i32>(),
-          None => continue
-        }
+        .reduce(|acc, items| HashSet::<char>::from_iter(acc.intersection(&items).copied()))
+      {
+        Some(items) => items.into_iter().map(|i| compute_priority(i)).sum(),
+        None => 0,
+      }
     }
 
     Ok(total_priority)
@@ -29,8 +28,8 @@ impl Puzzle for Day3Part2 {
 }
 
 fn compute_priority(item: char) -> i32 {
-  match item as u32 {
+  match item as i32 {
     item if item >= 97 => item - 96,
     item => item - 38,
-  }.try_into().unwrap()
+  }
 }
