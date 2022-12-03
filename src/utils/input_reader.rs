@@ -7,6 +7,7 @@ pub fn for_day(day: i32) -> Result<Lines<BufReader<File>>, Box<dyn Error>> {
   read_input(format!("inputs/day_{}.txt", day))
 }
 
+#[cfg(test)]
 pub fn example_for_day(day: i32) -> Result<Lines<BufReader<File>>, Box<dyn Error>> {
   read_input(format!("inputs/day_{}_example.txt", day))
 }
