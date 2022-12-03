@@ -21,7 +21,7 @@ impl Puzzle for Day3Part2 {
         .map(|l| HashSet::<char>::from_iter(l.chars()))
         .reduce(|acc, items| HashSet::<char>::from_iter(acc.intersection(&items).copied()))
       {
-        Some(items) => items.into_iter().map(|i| compute_priority(i)).sum(),
+        Some(items) => items.into_iter().map(compute_priority).sum(),
         None => 0,
       }
     }

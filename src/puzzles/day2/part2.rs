@@ -21,12 +21,12 @@ impl Puzzle for Day2Part2 {
       score += match line?.chars().collect_tuple() {
         Some((theirs, _, 'X')) => {
           let mine = lose_combinations.get(&theirs).expect("turn should exist");
-          scores.get(&mine).expect("turn should exist") + 0
+          *scores.get(mine).expect("turn should exist")
         }
         Some((theirs, _, 'Y')) => scores.get(&theirs).expect("turn should exist") + 3,
         Some((theirs, _, 'Z')) => {
           let mine = win_combinations.get(&theirs).expect("turn should exist");
-          scores.get(&mine).expect("turn should exist") + 6
+          scores.get(mine).expect("turn should exist") + 6
         }
         _ => panic!("invalid input"),
       }
