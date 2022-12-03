@@ -1,5 +1,7 @@
 use crate::utils::puzzle::Puzzle;
 
+use itertools::Itertools;
+
 use std::collections::HashSet;
 use std::error::Error;
 use std::fs::File;
@@ -12,7 +14,7 @@ impl Puzzle for Day3Part1 {
     let mut total_priority = 0;
 
     for line in lines {
-      let items: Vec<char> = line?.chars().collect();
+      let items = line?.chars().collect_vec();
       let (left, right) = items.split_at(items.len() / 2);
       let left_set = HashSet::<&char>::from_iter(left);
       let right_set = HashSet::<&char>::from_iter(right);

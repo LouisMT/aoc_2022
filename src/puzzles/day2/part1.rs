@@ -31,9 +31,9 @@ impl Puzzle for Day2Part1 {
       match line?.chars().collect_tuple() {
         Some((theirs, _, mine)) => {
           score += combinations.get(&(mine, theirs)).unwrap_or(&0);
-          score += scores.get(&mine).unwrap_or(&0);
+          score += scores.get(&mine).expect("turn should exist");
         }
-        None => panic!("Unexpected number of chars"),
+        None => panic!("invalid input"),
       }
     }
 

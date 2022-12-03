@@ -20,15 +20,15 @@ impl Puzzle for Day2Part2 {
     for line in lines {
       score += match line?.chars().collect_tuple() {
         Some((theirs, _, 'X')) => {
-          let mine = lose_combinations.get(&theirs).unwrap();
-          scores.get(&mine).unwrap_or(&0).to_owned()
+          let mine = lose_combinations.get(&theirs).expect("turn should exist");
+          scores.get(&mine).expect("turn should exist") + 0
         }
-        Some((theirs, _, 'Y')) => 3 + scores.get(&theirs).unwrap_or(&0),
+        Some((theirs, _, 'Y')) => scores.get(&theirs).expect("turn should exist") + 3,
         Some((theirs, _, 'Z')) => {
-          let mine = win_combinations.get(&theirs).unwrap();
-          6 + scores.get(&mine).unwrap_or(&0)
+          let mine = win_combinations.get(&theirs).expect("turn should exist");
+          scores.get(&mine).expect("turn should exist") + 6
         }
-        _ => panic!("Unexpected number of chars"),
+        _ => panic!("invalid input"),
       }
     }
 

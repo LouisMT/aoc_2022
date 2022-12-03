@@ -25,6 +25,7 @@ impl Puzzle for Day1Part2 {
     }
 
     max_calories.push(current_calories);
+
     let top_3_sum = max_calories
       .into_iter()
       .sorted_by(|a, b| b.cmp(a))
