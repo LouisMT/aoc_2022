@@ -13,9 +13,12 @@ impl Puzzle for Day3Part2 {
   fn solve(lines: Lines<BufReader<File>>) -> Result<i32, Box<dyn Error>> {
     let mut total_priority = 0;
 
-    for lines_chunk in &lines.chunks(3) {
-      total_priority += match lines_chunk
-        .map(|l| HashSet::<char>::from_iter(l.unwrap().chars()))
+    for lines in &lines.chunks(3) {
+      let lines: Vec<_> = lines.try_collect()?;
+
+      total_priority += match lines
+        .into_iter()
+        .map(|l| HashSet::<char>::from_iter(l.chars()))
         .reduce(|acc, items| HashSet::<char>::from_iter(acc.intersection(&items).copied()))
       {
         Some(items) => items.into_iter().map(|i| compute_priority(i)).sum(),
