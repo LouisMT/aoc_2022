@@ -5,7 +5,7 @@ use std::error::Error;
 
 pub struct Day1Part1();
 
-impl Puzzle for Day1Part1 {
+impl Puzzle<i32> for Day1Part1 {
   fn solve(lines: Vec<String>) -> Result<i32, Box<dyn Error>> {
     let mut current_calories = 0;
     let mut max_calories = 0;

@@ -6,7 +6,7 @@ use std::error::Error;
 
 pub struct Day4Part2();
 
-impl Puzzle for Day4Part2 {
+impl Puzzle<i32> for Day4Part2 {
   fn solve(lines: Vec<String>) -> Result<i32, Box<dyn Error>> {
     let mut partially_overlapping_count = 0;
 

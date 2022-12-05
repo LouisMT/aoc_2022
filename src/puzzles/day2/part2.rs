@@ -7,7 +7,7 @@ use std::error::Error;
 
 pub struct Day2Part2();
 
-impl Puzzle for Day2Part2 {
+impl Puzzle<i32> for Day2Part2 {
   fn solve(lines: Vec<String>) -> Result<i32, Box<dyn Error>> {
     let win_combinations = HashMap::from([('A', 'B'), ('B', 'C'), ('C', 'A')]);
     let lose_combinations = HashMap::from([('A', 'C'), ('B', 'A'), ('C', 'B')]);

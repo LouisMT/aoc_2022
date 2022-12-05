@@ -7,7 +7,7 @@ use std::error::Error;
 
 pub struct Day3Part2();
 
-impl Puzzle for Day3Part2 {
+impl Puzzle<i32> for Day3Part2 {
   fn solve(lines: Vec<String>) -> Result<i32, Box<dyn Error>> {
     let mut total_priority = 0;
 
