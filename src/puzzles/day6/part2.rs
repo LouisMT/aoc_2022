@@ -21,7 +21,7 @@ impl Puzzle<usize> for Day6Part2 {
       }
     }
 
-    Ok(1)
+    panic!("marker not found");
   }
 }
 
