@@ -70,24 +70,24 @@ impl Point {
     }
   }
 
-  fn up(&self, _: &Point) -> Option<Point> {
-    if self.y == 0 {
-      None
-    } else {
-      Some(Point {
-        x: self.x,
-        y: self.y - 1,
-      })
-    }
-  }
-
-  fn down(&self, max: &Point) -> Option<Point> {
+  fn up(&self, max: &Point) -> Option<Point> {
     if self.y == max.y {
       None
     } else {
       Some(Point {
         x: self.x,
         y: self.y + 1,
+      })
+    }
+  }
+
+  fn down(&self, _: &Point) -> Option<Point> {
+    if self.y == 0 {
+      None
+    } else {
+      Some(Point {
+        x: self.x,
+        y: self.y - 1,
       })
     }
   }
