@@ -77,20 +77,20 @@ impl Point {
   }
 
   fn follow(&self, head: &Point) -> Point {
-    // 11U22
+    // 11T22
     // 1NNN2
-    // LNSNR -> S = self
+    // LNHNR -> H = head
     // 3NNN4
-    // 33D44
+    // 33B44
 
     match (self.x - head.x, self.y - head.y) {
       // Case L
       (-2, 0) => self.right(),
       // Case R
       (2, 0) => self.left(),
-      // Case D
+      // Case B
       (0, -2) => self.up(),
-      // Case U
+      // Case T
       (0, 2) => self.down(),
       // Case 1
       (-1, 2) | (-2, 1) | (-2, 2) => self.right().down(),
@@ -100,7 +100,7 @@ impl Point {
       (-1, -2) | (-2, -1) | (-2, -2) => self.right().up(),
       // Case 4
       (1, -2) | (2, -1) | (2, -2) => self.left().up(),
-      // Case N or S
+      // Case N or H
       _ => *self,
     }
   }
